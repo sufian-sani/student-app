@@ -20,6 +20,17 @@ jobs:
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
+            if [ ! -d "/home/ubuntu/attendance-app/.git" ]; then
+              # First-time setup
+              mkdir -p /home/ubuntu/attendance-app
+              git clone https://github.com/sufian-sani/student-app.git /home/ubuntu/attendance-app
+            else
+              # Subsequent deployments
+              cd /home/ubuntu/attendance-app
+              git pull origin main
+            fi
+
             cd /home/ubuntu/attendance-app
             git pull origin main
 
