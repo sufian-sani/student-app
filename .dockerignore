@@ -1,0 +1,10 @@
+# Virtual environments
+.venv/
+
+
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
