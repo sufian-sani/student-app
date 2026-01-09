@@ -77,7 +77,6 @@ jobs:
               -e DB_USER=root \
               -e DB_PASSWORD=root \
               -e DB_NAME=attendance_db \
-              ${{ secrets.DOCKER_USERNAME }}/flask-attendance-app
 
             echo "Successfully deployed to \$IDLE_COLOR"
 
