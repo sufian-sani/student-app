@@ -21,13 +21,13 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key.pem ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} << EOF
 
             # Ensure Docker network exists
-            docker network create app_network || true
+            docker network create my_network || true
 
             # Ensure MySQL is running - starts once, doesn't restart on app deployment
             if ! docker ps --filter "name=mysql-db" | grep mysql-db; then
               docker run -d \
                 --name mysql-db \
-                --network app_network \
+                --network my_network \
                 -e MYSQL_ROOT_PASSWORD=root \
                 -e MYSQL_DATABASE=attendance_db \
                 -p 3306:3306 \
@@ -71,12 +71,13 @@ jobs:
             # Run new Flask app in idle slot
             docker run -d \
               --name flask-app-\$IDLE_COLOR \
-              --network app_network \
+              --network my_network \
               -p \$IDLE_PORT:5000 \
               -e DB_HOST=mysql-db \
               -e DB_USER=root \
               -e DB_PASSWORD=root \
               -e DB_NAME=attendance_db \
+              student-app-app
 
             echo "Successfully deployed to \$IDLE_COLOR"
 
