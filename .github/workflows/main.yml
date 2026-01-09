@@ -65,10 +65,6 @@ jobs:
             echo "Active Color: \$ACTIVE_COLOR"
             echo "Deploying to: \$IDLE_COLOR on port \$IDLE_PORT"
 
-            # Authenticate and pull the new image
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker pull ${{ secrets.DOCKER_USERNAME }}/flask-attendance-app
-
             # Stop and remove the old idle container if it exists
             docker stop flask-app-\$IDLE_COLOR || true
             docker rm flask-app-\$IDLE_COLOR || true
