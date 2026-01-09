@@ -16,7 +16,7 @@ services:
 
   app:
     build: .
-    container_name: flask-student-app
+    container_name: flask-app-blue
     restart: on-failure
     ports:
       - "5000:5000"
